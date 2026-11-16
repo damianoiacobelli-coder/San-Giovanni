@@ -1,0 +1,78 @@
+SAN GIOVANNI NETTUNO — VERSIONE 5: NOTIFICHE PUSH
+==================================================
+
+Contiene la grafica vivace v2, la navigazione approvata e il database collegato v4.
+Il pacchetto NON contiene password o chiavi segrete. La chiave pubblica Supabase in public/config.js è pubblica per definizione.
+
+COSA FUNZIONA DOPO LA CONFIGURAZIONE
+- Sezione Avvisi: pulsante Attiva/Disattiva notifiche (consenso esplicito).
+- Il dispositivo registra una subscription; i dati sono in Supabase, NON visibili dal browser.
+- Alla PRIMA pubblicazione di un avviso (nuovo o da bozza), l'app chiede all'endpoint protetto di inviare una notifica.
+- Amministrazione: icona campanella sugli avvisi pubblicati per tentare il primo invio manuale.
+- Una notifica per avviso (anti-duplicazione); bozze e modifiche a un avviso già pubblicato NON generano ulteriori push.
+- Clic sulla notifica -> sezione Avvisi.
+- Nessuna anagrafica di famiglie o minori raccolta.
+
+A. AGGIORNA IL DATABASE (SENZA CANCELLARE I DATI)
+1. Supabase > Progetto San Giovanni Nettuno > SQL Editor > New query.
+2. Apri sql/01_notifiche_push.sql, copia tutto e premi RUN.
+3. Deve apparire 'Success'. Le tabelle precedenti restano intatte.
+
+B. CONFIGURA NETLIFY (SOLO Environment variables, NON nel codice!)
+Apri Netlify > sito sangiovanni > Project configuration > Environment variables.
+Aggiungi esattamente queste QUATTRO variabili:
+
+  SUPABASE_URL                 https://wlvxxgbpuaoivcviwfef.supabase.co
+  SUPABASE_SERVICE_ROLE_KEY    (usa la chiave segreta sb_secret_... da Supabase > Settings > API Keys)
+  VAPID_PUBLIC_KEY             (prima riga del file RISERVATO Chiavi_VAPID_San_Giovanni_RISERVATE.txt)
+  VAPID_PRIVATE_KEY            (seconda riga dello stesso file RISERVATO)
+
+Per la chiave Supabase usa un'API Secret key (sb_secret_...), non la Publishable key!
+Non inviare la Secret key qui in chat e non inserirla in public/config.js.
+Netlify: mantieni abilitate queste variabili per il runtime Functions.
+Tutte le variabili nuove si applicano dopo una nuova pubblicazione.
+
+C. PUBBLICA L'INTERO PROGETTO, NON SOLO LA CARTELLA public
+Per questa versione sono NECESSARIE le Netlify Functions, oltre all'HTML.
+Modalità consigliata: collega il progetto a un repository Git privato su GitHub,
+poi pubblica l'intero contenuto di questa cartella; Netlify rileverà netlify.toml,
+installerà automaticamente le dipendenze e creerà gli endpoint.
+In alternativa, con Node.js 22 installato sul tuo PC:
+  npm install
+  npx netlify login
+  npx netlify link          (seleziona il sito esistente "sangiovanni", NON crearne uno nuovo)
+  npx netlify deploy --prod
+
+ATTENZIONE: il solo drag-and-drop della cartella public NON pubblica il backend delle notifiche.
+Se usi Netlify Drop, controlla nei Deploy logs che le Functions siano state compilate;
+se mancano, usa Git o Netlify CLI. Non dare per scontato che il drag-and-drop delle sole pagine basti.
+
+D. TEST DI VERIFICA
+1. Apri https://sangiovanni.netlify.app/.netlify/functions/push-key.
+   Deve apparire un JSON con "publicKey" (nessuna chiave privata!).
+2. Apri https://sangiovanni.netlify.app/#avvisi da Chrome Android o Edge/Chrome desktop.
+   Clicca "Attiva notifiche" e autorizza la richiesta del browser.
+3. Controlla su Supabase con SQL Editor:
+       select count(*) from public.push_subscriptions;
+   Deve essere almeno 1 dopo l'iscrizione.
+4. Accedi come admin su un altro browser, crea un NUOVO avviso e spunta "Pubblica".
+5. Dopo il salvataggio, sul dispositivo iscritto deve comparire la notifica.
+6. Su Supabase:
+       select * from public.push_dispatches order by requested_at desc limit 5;
+7. Premi "Disattiva notifiche" sul dispositivo di prova e verifica che la riga venga rimossa.
+
+IPHONE
+Da Safari: Condividi > Aggiungi alla schermata Home. Apri l'app dalla Home,
+poi attiva le notifiche con il pulsante. Serve un sistema iOS compatibile e il consenso.
+
+SICUREZZA / LIMITI V5
+- L'invio richiede un token di un vero admin/editor e controlla che l'avviso sia published=true.
+- Le sottoscrizioni push sono indirizzi tecnici sensibili: non pubblicare la relativa tabella.
+- L'endpoint pubblico d'iscrizione ha controlli di origine, formato e hostname, ma non un rate-limit robusto; prima di estendere a centinaia di utenti va aggiunta protezione antiabuso.
+- La prima versione invia in modalità 'best effort': un errore di rete non garantisce un recapito. Duplicati evitati da chiave univoca nel database; eventuali errori del primo invio non sono recuperati automaticamente.
+- Max 2000 dispositivi per invio per proteggere la funzione; prima di salire di scala va introdotta una coda/batch affidabile.
+- Se modifichi le chiavi VAPID dopo aver attivato le iscrizioni, i dispositivi dovranno reiscriversi.
+- Se la parrocchia tratterà dati di minori, serviranno privacy e gestione autorizzazioni specifiche (non disponibili in questa versione).
+- Privilegiare test con dati fittizi fino al completamento della verifica online.
+
+NON SERVE RIPETERE LO SCHEMA COMPLETO V3: ESEGUIRE SOLO LA MIGRAZIONE 01_notifiche_push.sql.

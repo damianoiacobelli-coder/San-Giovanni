@@ -1,0 +1,17 @@
+{
+  "name": "san-giovanni-nettuno-app",
+  "version": "5.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/check-project.mjs",
+    "gen:vapid": "node scripts/genera-chiavi-vapid.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.119.0",
+    "web-push": "3.6.7"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
