@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#116962">
-  <meta name="description" content="App della Parrocchia San Giovanni di Nettuno, versione con notifiche push facoltative.">
+  <meta name="description" content="App della Parrocchia San Giovanni di Nettuno, versione con repertori liturgici personalizzabili e notifiche push facoltative.">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" type="image/svg+xml" href="./icon.svg">
   <title>San Giovanni · Nettuno — La nostra comunità</title>
@@ -173,7 +173,7 @@
     .modal h2 {font:700 28px/1.2 Georgia,serif;margin:12px 25px 16px 0}
     .modal p {line-height:1.8;color:#68746a;font-size:13px}
     .modal .close {position:absolute;right:18px;top:18px}
-    .toast {position:fixed;bottom:28px;right:27px;z-index:30;display:flex;align-items:center;gap:10px;background:var(--forestdeep);color:white;box-shadow:0 16px 30px rgba(20,60,43,.2);padding:14px 18px;border-radius:11px;font-size:12px;max-width:340px}
+    .toast {pointer-events:none;position:fixed;bottom:28px;right:27px;z-index:30;display:flex;align-items:center;gap:10px;background:var(--forestdeep);color:white;box-shadow:0 16px 30px rgba(20,60,43,.2);padding:14px 18px;border-radius:11px;font-size:12px;max-width:340px}
     .mobile-head,.bottom-nav,.more-menu {display:none}
     .minor {font-size:11px;line-height:1.7;color:#92988f}
     .pt0 {padding-top:0}.mt0 {margin-top:0}.mb0{margin-bottom:0}.mb20{margin-bottom:20px}.mt20{margin-top:20px}
@@ -318,6 +318,62 @@
     .login-help{font-size:11px;line-height:1.6;color:var(--muted);margin-top:13px}
     .inline-link{background:none;border:0;text-decoration:underline;color:inherit;padding:0 2px;cursor:pointer;font-size:inherit}
     @media(max-width:650px){.admin-access{padding:23px}.admin-tabs{gap:6px}.admin-tabs .pill{font-size:11px}}
+  
+    /* v6 - doppio calendario Messe + eccezioni liturgiche */
+    .mass-day-box {margin-bottom:22px;background:linear-gradient(115deg,#f9fbf6,#faf5e9)}
+    .mass-day-head {display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;margin-bottom:13px}
+    .mass-day-head h2 {font:700 26px/1.3 Georgia,serif;color:var(--forest);margin:7px 0}
+    .mass-day-head p {margin:0;font-size:12px;color:#7c867b}
+    .mass-day-head .field {min-width:165px}
+    .mass-times-list {display:flex;gap:9px;flex-wrap:wrap;align-items:center;justify-content:flex-end}
+    .mass-time-chip {display:inline-flex;align-items:center;justify-content:center;border-radius:10px;padding:9px 12px;background:#eaf2ea;color:var(--forest);font-weight:800;min-width:60px;font-size:14px;white-space:nowrap}
+    .mass-day-box>.mass-times-list {justify-content:flex-start}
+    .mass-day-box .mass-time-chip {font-size:19px;background:var(--forest);color:white;padding:12px 18px}
+    .mass-season-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .mass-season {background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:21px;box-shadow:var(--shadow)}
+    .mass-season.is-current {border-color:#a0b9a3;box-shadow:0 0 0 2px rgba(79,117,91,.08)}
+    .mass-season-top {display:flex;justify-content:space-between;gap:10px;align-items:start;margin-bottom:12px}
+    .mass-season-top h3 {font:700 24px Georgia,serif;color:var(--forest);margin:8px 0 4px}
+    .mass-season-row {display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 0;border-top:1px solid var(--line)}
+    .mass-season-row strong {font-size:13px;color:var(--ink)}
+    .mass-special-layout {display:grid;grid-template-columns:minmax(0,1.55fr) minmax(245px,.85fr);gap:16px}
+    .mass-special-row {display:flex;gap:10px;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--line)}
+    .mass-special-row:first-child {padding-top:0}
+    .mass-special-row:last-child {padding-bottom:0;border:0}
+    .mass-special-date h3 {margin:5px 0;font-size:15px}
+    .mass-special-date p {font-size:11px;color:#79857a;margin:6px 0 0;line-height:1.6}
+    @media(max-width:900px){.mass-special-layout{grid-template-columns:1fr}.mass-season-row{flex-wrap:wrap}.mass-season-row .mass-times-list{justify-content:flex-start}}
+    @media(max-width:610px){.mass-season-grid{grid-template-columns:1fr}.mass-special-row{flex-direction:column;align-items:flex-start}.mass-special-row .mass-times-list{justify-content:flex-start}.mass-day-head .field{width:100%}}
+
+
+    /* v7 – repertori delle tre Messe: percorso categoria → momento → testo */
+    .song-crumbs{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:0 0 22px;color:var(--muted,#75847b);font-size:12px}
+    .song-crumbs button{border:0;background:none;cursor:pointer;color:var(--forest,#23746d);font:inherit;font-weight:700;padding:5px 3px}
+    .song-crumbs span{opacity:.58}
+    .song-category-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+    .song-service-card{background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:23px;display:flex;flex-direction:column;align-items:flex-start;text-align:left;min-height:204px;gap:12px;cursor:pointer;color:inherit;transition:transform .2s,border-color .2s}
+    .song-service-card:hover,.song-slot-card:hover{transform:translateY(-3px);border-color:#9bbfba}
+    .song-service-card:focus-visible,.song-slot-card:focus-visible{outline:3px solid #86c3b5;outline-offset:2px}
+    .song-service-card .symbol{width:45px;height:45px;display:grid;place-items:center;border-radius:13px;background:#dcf2e9;color:#206961}
+    .song-service-card:nth-child(2) .symbol{background:#fff0df;color:#a86535}
+    .song-service-card:nth-child(3) .symbol{background:#eee7fa;color:#785a9c}
+    .song-service-card .song-service-name{font-weight:800;font-size:18px;line-height:1.3}
+    .song-service-card .song-service-hint{color:#78877d;font-size:12px;line-height:1.5;margin-top:auto}
+    .song-slots-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+    .song-slot-card{background:var(--paper);border:1px solid var(--line);border-radius:17px;min-height:138px;padding:19px 14px;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:9px;cursor:pointer;color:inherit;transition:transform .2s,border-color .2s}
+    .song-slot-card:nth-child(4n+2){background:linear-gradient(140deg,var(--paper),#fffaf4)}
+    .song-slot-card:nth-child(4n+3){background:linear-gradient(140deg,var(--paper),#f6f4fd)}
+    .song-slot-card .song-slot-title{font-size:15px;font-weight:800}
+    .song-slot-card .song-slot-count{margin-top:auto;color:#79867b;font-size:12px}
+    .song-lyrics-list{display:grid;gap:18px;max-width:850px}
+    .song-lyrics-card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:var(--shadow)}
+    .song-lyrics-card h3{margin:0 0 6px;font-size:21px;line-height:1.35}
+    .song-lyrics-card .song-lyrics{white-space:pre-wrap;font-size:16px;line-height:1.95;font-family:Georgia,serif;color:var(--ink);padding:16px 0 5px;overflow-wrap:anywhere}
+    .song-lyrics-empty{color:#76857e;font-size:13px;padding:14px 0}
+    .song-lyrics-card .song-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}
+    .song-admin-help{font-size:12px;line-height:1.6;color:#78867e;background:var(--mist,#edf7f5);padding:12px 15px;border-radius:12px;margin:0 0 14px}
+    @media(max-width:950px){.song-category-grid{grid-template-columns:1fr 1fr}.song-slots-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:610px){.song-category-grid{grid-template-columns:1fr}.song-service-card{min-height:150px}.song-slots-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.song-slot-card{min-height:125px;padding:15px}.song-lyrics-card{padding:20px}.song-lyrics-card .song-lyrics{font-size:17px}}
   </style>
 </head>
 <body>
@@ -326,7 +382,7 @@
   <script>
   (()=>{
     'use strict';
-    const DATA_KEY='sg_v4_demo_content', FAV='sg_prototipo_canti_fav_v1', THEME='sg_stile_v2';
+    const DATA_KEY='sg-v8-data', FAV='sg_prototipo_canti_fav_v1', THEME='sg_stile_v2';
     const paths = {
       home:'<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"/>',
       bell:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/>',
@@ -382,13 +438,24 @@
       {date:'2026-12-17',time:'20:30',title:'Piazza Grande',where:'Sala della Madonna',cat:'Giovani'},
       {date:'2026-12-20',time:'10:00',title:'Catechesi · Leone e Angelo',where:'Parrocchia San Giovanni',cat:'Catechesi'}
     ];
+    // Testi ORIGINALI dimostrativi: non sono canti liturgici ufficiali.
     const demoSongs=[
-      {id:'s1',name:'Pane del cielo',type:'Comunione',note:'Scheda del canto da completare'},
-      {id:'s2',name:'Servo per amore',type:'Offertorio',note:'Scheda del canto da completare'},
-      {id:'s3',name:'Laudato sii, o mi Signore',type:'Ingresso',note:'Scheda del canto da completare'},
-      {id:'s4',name:'Resta con noi, Signore, la sera',type:'Comunione',note:'Scheda del canto da completare'},
-      {id:'s5',name:'Symbolum 77',type:'Professione di fede',note:'Scheda del canto da completare'},
-      {id:'s6',name:'Alleluia, la nostra festa',type:'Acclamazione',note:'Scheda del canto da completare'}
+      {id:'demo-song-1',name:'Insieme verso la luce (demo)',type:'Ingresso',note:'Testo originale di prova. Da sostituire con un canto autorizzato.',lyrics:'Siamo qui, una voce sola,\npassi nuovi sulla stessa via.\nLa speranza apre il nostro giorno,\nla tua pace ci accompagna.'},
+      {id:'demo-song-2',name:'Una casa per tutti (demo)',type:'Ingresso',note:'Secondo testo originale di prova.',lyrics:'Questa casa è aperta a tutti,\nchi arriva trova una mano.\nCondividiamo oggi il cammino,\nnel tuo amore ci riconosciamo.'},
+      {id:'demo-song-3',name:'Il pane condiviso (demo)',type:'Comunione',note:'Testo originale di prova.',lyrics:'Pane spezzato, dono di pace,\nriunisci i cuori della comunità.\nUn solo gesto, una sola mensa,\nci invita a vivere nella carità.'}
+    ];
+    const SONG_SERVICES=['Messa Vespertina Sabato','Messa domenicale dei ragazzi','Messa Domenica ore 11'];
+    const SONG_MOMENTS=['Ingresso','Gloria','Alleluia','Offertorio','Santo','Agnello di Dio','Comunione','Finale'];
+    const demoCategories=SONG_SERVICES.map((name,i)=>({id:'demo-cat-'+i,name,sort_order:i,published:true}));
+    const demoSlots=demoCategories.flatMap(cat=>SONG_MOMENTS.map((name,i)=>({id:'demo-slot-'+cat.id+'-'+i,category_id:cat.id,name,sort_order:i,published:true})));
+    const demoSlotId=(category,moment)=>demoSlots.find(slot=>slot.category_id===demoCategories.find(c=>c.name===category)?.id && slot.name===moment)?.id;
+
+    const demoPlacements=[
+      {id:'demo-placement-1',song_id:'demo-song-1',service_category:SONG_SERVICES[0],moment:'Ingresso',sort_order:0,published:true},
+      {id:'demo-placement-2',song_id:'demo-song-1',service_category:SONG_SERVICES[1],moment:'Ingresso',sort_order:0,published:true},
+      {id:'demo-placement-3',song_id:'demo-song-2',service_category:SONG_SERVICES[1],moment:'Ingresso',sort_order:1,published:true},
+      {id:'demo-placement-4',song_id:'demo-song-3',service_category:SONG_SERVICES[2],moment:'Comunione',sort_order:0,published:true},
+      {id:'demo-placement-5',song_id:'demo-song-3',service_category:SONG_SERVICES[0],moment:'Comunione',sort_order:0,published:true}
     ];
     const cfg=window.SG_CONFIG||{};
     const configured=Boolean(cfg.supabaseUrl && cfg.supabasePublishableKey && !String(cfg.supabaseUrl).includes('INSERISCI'));
@@ -396,21 +463,38 @@
     const demoInitial={
       notices:demoNotices.map(x=>({id:x.id,title:x.title,body:x.desc,date_on:x.date,category:x.cat,audience:'public',published:true})),
       events:demoEvents.map((x,i)=>({id:'event-'+i,title:x.title,date_on:x.date,time_of_day:x.time,location:x.where,category:x.cat,published:true})),
-      songs:demoSongs.map(x=>({id:x.id,title:x.name,category:x.type,notes:x.note,published:true})),
+      songs:demoSongs.map(x=>({id:x.id,title:x.name,category:x.type,notes:x.note,lyrics:x.lyrics,published:true})),
+      song_categories:demoCategories,
+      song_slots:demoSlots,
+      song_placements:demoPlacements.map(p=>({...p,slot_id:demoSlotId(p.service_category,p.moment)})),
       reflections:[{id:'reflection-demo',title:'Fare spazio all’ascolto',date_on:'2026-11-16',body:'Ci sono giorni in cui le parole riempiono ogni momento. Gli impegni si susseguono, le richieste aumentano, e il tempo per ascoltare davvero sembra diventare sempre più piccolo.\n\nEppure una comunità si costruisce con la disponibilità ad accogliere la voce di chi abbiamo accanto.\n\nOggi prova a regalare a qualcuno non soltanto una risposta, ma un ascolto pieno.',published:true}],
-      mass_times:[{id:'mass-demo',day_label:'Domenica',time_of_day:'10:00',description:'Santa Messa comunitaria legata al percorso di catechesi (esempio, da confermare)',sort_order:10,published:true}]
+      mass_schedule:[
+        {id:'sol-fer',season:'solare',day_type:'Feriale / Prefestivo',times_text:'17:30',published:true},
+        {id:'sol-fes',season:'solare',day_type:'Festivo',times_text:'08:00, 11:00, 17:30',published:true},
+        {id:'leg-fer',season:'legale',day_type:'Feriale / Prefestivo',times_text:'18:30',published:true},
+        {id:'leg-fes',season:'legale',day_type:'Festivo',times_text:'08:00, 11:00, 18:30',published:true}
+      ],
+      mass_exceptions:[{id:'natale-demo',date_on:'2026-12-25',title:'Natale',times_text:'08:00, 11:00, 17:30',notes:'Esempio da confermare prima della pubblicazione.',published:false}]
     };
-    const tables=['notices','events','songs','reflections','mass_times'];
+    const tables=['notices','events','songs','song_categories','song_slots','song_placements','reflections','mass_schedule','mass_exceptions'];
     const isGoodDemo=(c)=>c && tables.every(t=>Array.isArray(c[t]));
-    let content=configured?{notices:[],events:[],songs:[],reflections:[],mass_times:[]} : getStored(DATA_KEY,demoInitial);
-    if(!isGoodDemo(content))content=structuredClone(demoInitial);
+    const oldDemo=getStored('sg-v7-data',null);
+    const upgradeDemo=(old)=>{
+      if(!old || !Array.isArray(old.songs) || !Array.isArray(old.song_placements))return structuredClone(demoInitial);
+      const next={...structuredClone(demoInitial),...old,song_categories:structuredClone(demoCategories),song_slots:structuredClone(demoSlots)};
+      next.song_placements=old.song_placements.map(p=>({...p,slot_id:demoSlotId(p.service_category,p.moment)})).filter(p=>p.slot_id);
+      return next;
+    };
+    let content=configured?Object.fromEntries(tables.map(t=>[t,[]])):getStored(DATA_KEY,null);
+    if(!configured && !isGoodDemo(content)){content=upgradeDemo(oldDemo);saveStored(DATA_KEY,content);}
+
     let events=[],songs=[];
     function normalize(){
       events=content.events.filter(x=>x.published!==false).map(x=>({id:x.id,date:x.date_on,time:String(x.time_of_day||'').slice(0,5),title:x.title,where:x.location,cat:x.category}));
-      songs=content.songs.filter(x=>x.published!==false).map(x=>({id:x.id,name:x.title,type:x.category,note:x.notes}));
+      songs=content.songs.filter(x=>x.published!==false).map(x=>({id:x.id,name:x.title,type:x.category,note:x.notes,lyrics:x.lyrics||''}));
     }
     normalize();
-    const state={theme:(getStored(THEME,'vivace')==='sobrio'?'sobrio':'vivace'),page:'home',filter:'Tutti',search:'',songFilter:'Tutti',songSearch:'',month:new Date().getMonth(),year:new Date().getFullYear(),selectedDate:new Date().toISOString().slice(0,10),more:false,modal:null,toast:null,favs:getStored(FAV,[]),adminType:'notices',editingId:null};
+    const state={theme:(getStored(THEME,'vivace')==='sobrio'?'sobrio':'vivace'),page:'home',filter:'Tutti',search:'',songFilter:'Tutti',songSearch:'',songService:null,songMoment:null,month:new Date().getMonth(),year:new Date().getFullYear(),selectedDate:new Date().toISOString().slice(0,10),more:false,modal:null,toast:null,favs:getStored(FAV,[]),adminType:'notices',editingId:null,massDate:romeToday()};
     document.documentElement.dataset.theme=state.theme;
     const allNotices=()=>content.notices.filter(x=>x.published!==false).map(x=>({id:x.id,date:x.date_on,cat:x.category,title:x.title,desc:x.body||'',audience:'Tutta la comunità'}));
     function saveDemo(){if(!cloud.enabled)saveStored(DATA_KEY,content);normalize();render();}
@@ -496,28 +580,81 @@
     function avvisi(){const cats=['Tutti','Liturgia','Catechesi','Giovani','Comunità'];const all=allNotices().filter(n=>(state.filter==='Tutti'||n.cat===state.filter)&&`${n.title} ${n.desc}`.toLowerCase().includes(state.search.toLowerCase())).sort((a,b)=>a.date.localeCompare(b.date));return `${head('RESTA AGGIORNATO','Avvisi e comunicazioni','Le notizie importanti della parrocchia, gli appuntamenti e le iniziative dei diversi gruppi.')}${sampleBanner()}${pushPanel()}<div class="search-line"><div class="input-wrap">${I('search',18)}<input id="notice-search" placeholder="Cerca un avviso..." value="${esc(state.search)}" aria-label="Cerca tra gli avvisi"></div><div class="filters">${cats.map(x=>`<button class="pill ${state.filter===x?'active':''}" data-filter="${x}">${x}</button>`).join('')}</div></div><div class="cards2">${all.map(n=>`<article class="info-card"><div class="category">${esc(n.cat)} · ${dateFmt(n.date)}</div><h3>${esc(n.title)}</h3><p>${esc(n.desc.length>170?n.desc.slice(0,167)+'…':n.desc)}</p><div class="card-footer"><span class="meta-line">${I('users',15)} ${esc(n.audience||'Tutta la comunità')}</span><button class="text-btn" data-notice="${esc(n.id)}">Leggi ${I('arrow',15)}</button></div></article>`).join('')||'<div class="empty-state">Nessun avviso trovato. Prova un altro filtro.</div>'}</div>`}
     const mnames=['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
     function calendario(){const start=(new Date(state.year,state.month,1).getDay()+6)%7;const days=new Date(state.year,state.month+1,0).getDate();let cells='';for(let b=0;b<start;b++) cells+='<div class="cal-day blank"></div>';for(let day=1;day<=days;day++){let dat=`${state.year}-${String(state.month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;let evs=events.filter(x=>x.date===dat);cells+=`<button class="cal-day ${evs.length?'has-event':''} ${dat===state.selectedDate?'selected':''}" data-day="${dat}" aria-label="${dateFmt(dat)}${evs.length?', '+evs.length+' eventi':''}"><span>${day}</span><span class="dots">${evs.map(()=>'<i class="dot"></i>').join('')}</span></button>`}const dayE=events.filter(x=>x.date===state.selectedDate);return `${head('LA VITA PARROCCHIALE','Calendario','Tutti i prossimi incontri, le celebrazioni e le attività dei gruppi.')}${sampleBanner()}<div class="calendar-layout"><section class="calendar-shell"><div class="calendar-top"><h2>${mnames[state.month]} ${state.year}</h2><div class="cal-buttons"><button class="icon-btn" data-action="prev-month" aria-label="Mese precedente">${I('chevronleft',18)}</button><button class="icon-btn" data-action="next-month" aria-label="Mese successivo">${I('chevron',18)}</button></div></div><div class="calendar-grid">${['Lun','Mar','Mer','Gio','Ven','Sab','Dom'].map(x=>`<div class="weekday">${x}</div>`).join('')}${cells}</div></section><aside class="day-events"><div class="overline">APPUNTAMENTI DEL GIORNO</div><h3>${dateFmt(state.selectedDate)}</h3>${dayE.length?dayE.map(e=>`<div class="day-evt"><strong>${esc(e.time)} · ${esc(e.title)}</strong><p>${esc(e.where)}</p></div>`).join(''):`<div class="empty-state">${I('calendar',28)}<div>Non ci sono eventi inseriti per questa giornata.</div></div>`}<div class="soft-note" style="margin-top:25px">${I('info',16)} Il calendario completo verrà aggiornato dai responsabili parrocchiali.</div></aside></div>`}
-    function messe(){const rows=content.mass_times.filter(x=>x.published!==false).sort((a,b)=>(a.sort_order||0)-(b.sort_order||0));return `${head('ORARI E CELEBRAZIONI','Celebrare insieme','Gli orari delle celebrazioni e le informazioni utili per partecipare alla vita liturgica.')}${sampleBanner()}<div class="split"><section><div class="section-heading mt0"><h2>Santa Messa</h2></div>${rows.length?rows.map(x=>`<div class="time-card"><div class="time-icon">${I('church',24)}</div><div><h3>${esc(x.day_label)}</h3><p>${esc(x.description||'')}</p></div><div class="time-side">${esc(String(x.time_of_day||'').slice(0,5))}</div></div>`).join(''):'<div class="panel"><div class="empty-state">Orari in attesa di conferma e pubblicazione.</div></div>'}</section><aside class="panel"><div class="overline">SACRAMENTI</div><h3 style="font:700 24px Georgia,serif;margin:12px 0">Riconciliazione</h3><p style="font-size:12px;color:#7a857b;line-height:1.8">Per gli orari ordinari delle confessioni, rivolgersi alla segreteria parrocchiale. Questa sezione sarà aggiornata con le informazioni ufficiali.</p></aside></div>`}
-    function canti(){const filters=['Tutti','Ingresso','Offertorio','Comunione','Acclamazione','Professione di fede','Preferiti'];const arr=songs.filter(x=>(state.songFilter==='Tutti'||(state.songFilter==='Preferiti'?state.favs.includes(x.id):state.songFilter===x.type))&&x.name.toLowerCase().includes(state.songSearch.toLowerCase()));return `${head('REPERTORIO MUSICALE','Canti della comunità','Un archivio organizzato per cercare i canti durante le prove e le celebrazioni. I testi saranno aggiunti solo quando autorizzati.')}${sampleBanner()}${pushPanel()}<div class="search-line"><div class="input-wrap">${I('search',18)}<input id="song-search" placeholder="Cerca un canto..." value="${esc(state.songSearch)}" aria-label="Cerca tra i canti"></div></div><div class="filters mb20">${filters.map(x=>`<button class="pill ${state.songFilter===x?'active':''}" data-songfilter="${esc(x)}">${esc(x)}</button>`).join('')}</div><div class="cards2">${arr.map(x=>`<div class="song-card"><span class="song-symbol">${I('music',22)}</span><div class="song-main"><h3>${esc(x.name)}</h3><p>${esc(x.type)}</p><button class="text-btn" style="padding:7px 0 0" data-song="${x.id}">Apri scheda ${I('arrow',14)}</button></div><button class="heart-btn ${state.favs.includes(x.id)?'active':''}" data-fav="${x.id}" aria-label="${state.favs.includes(x.id)?'Rimuovi dai preferiti':'Aggiungi ai preferiti'}">${I('heart',21)}</button></div>`).join('')||'<div class="empty-state">Nessun canto trovato.</div>'}</div><p class="minor" style="margin-top:22px">Il catalogo è illustrativo. Nella versione reale potremo caricare testi autorizzati, accordi, PDF e file audio dei quali la parrocchia dispone dei diritti.</p>`}
+    // Le transizioni dell'ora legale seguono il calendario Europe/Rome: ultima domenica
+    // di marzo -> ora legale; ultima domenica di ottobre -> ora solare.
+    function lastSunday(year,month){const day=new Date(Date.UTC(year,month,0));return day.getUTCDate()-day.getUTCDay()}
+    function romeToday(){const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Rome',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const get=k=>parts.find(p=>p.type===k).value;return `${get('year')}-${get('month')}-${get('day')}`}
+    function seasonForDate(iso){const y=Number(iso.slice(0,4)),start=`${y}-03-${String(lastSunday(y,3)).padStart(2,'0')}`,end=`${y}-10-${String(lastSunday(y,10)).padStart(2,'0')}`;return iso>=start&&iso<end?'legale':'solare'}
+    function dayTypeForDate(iso){const [y,m,d]=iso.split('-').map(Number),weekday=new Date(Date.UTC(y,m-1,d)).getUTCDay();return weekday===0?'Festivo':'Feriale / Prefestivo'}
+    function prettyDayType(iso){const [y,m,d]=iso.split('-').map(Number),w=new Date(Date.UTC(y,m-1,d)).getUTCDay();return w===0?'Festivo':w===6?'Prefestivo':'Feriale'}
+    function sortedTimeList(times){return String(times||'').split(',').map(x=>x.trim()).filter(Boolean).sort()}
+    function massTimesMarkup(times){return `<div class="mass-times-list">${sortedTimeList(times).map(time=>`<span class="mass-time-chip">${esc(time)}</span>`).join('')}</div>`}
+    function scheduleFor(season,dayType){return content.mass_schedule.find(x=>x.published!==false&&x.season===season&&x.day_type===dayType)}
+    function exceptionFor(iso){return content.mass_exceptions.find(x=>x.published!==false&&x.date_on===iso)}
+    function dateMassInfo(iso){const exception=exceptionFor(iso),season=seasonForDate(iso),dayType=dayTypeForDate(iso);return {exception,season,dayType,record:exception||scheduleFor(season,dayType)}}
+    function seasonCard(season){const active=seasonForDate(romeToday())===season;return `<section class="mass-season ${active?'is-current':''}"><div class="mass-season-top"><div><div class="overline">ORARIO ${season.toUpperCase()}</div><h3>${season==='solare'?'Ora solare':'Ora legale'}</h3></div>${active?'<span class="label-tag">In vigore</span>':''}</div>${['Feriale / Prefestivo','Festivo'].map(kind=>{const row=scheduleFor(season,kind);return `<div class="mass-season-row"><div><strong>${kind==='Feriale / Prefestivo'?'Feriale e prefestivo':'Festivo'}</strong></div>${row?massTimesMarkup(row.times_text):'<span class="minor">Orario da pubblicare</span>'}</div>`}).join('')}</section>`}
+    function messe(){const iso=state.massDate||romeToday();const info=dateMassInfo(iso);const special=content.mass_exceptions.filter(x=>x.published!==false&&x.date_on>=romeToday()).sort((a,b)=>a.date_on.localeCompare(b.date_on)).slice(0,8);return `${head('ORARI E CELEBRAZIONI','Orari delle Sante Messe','Orari ordinari secondo l’ora solare o legale e calendario delle celebrazioni particolari.')}${sampleBanner()}<section class="panel mass-day-box"><div class="mass-day-head"><div><div class="overline">VERIFICA GLI ORARI DI UN GIORNO</div><h2>${dateFmt(iso)}</h2><p>${info.exception?'Celebrazione particolare · '+esc(info.exception.title):esc(prettyDayType(iso))+' · ora '+esc(info.season)}</p></div><div class="field"><label for="mass-date">Seleziona una data</label><input id="mass-date" type="date" value="${esc(iso)}"></div></div>${info.record?massTimesMarkup(info.record.times_text):'<div class="empty-state">Nessun orario pubblicato per questa data.</div>'}${info.exception?`<p class="minor" style="margin-top:12px">${esc(info.exception.notes||'Gli orari particolari sostituiscono quelli ordinari per questa data.')}</p>`:''}</section><div class="section-heading"><div><h2>Orari ordinari</h2><p>Il calendario passa automaticamente da ora solare a ora legale e viceversa.</p></div></div><div class="mass-season-grid">${seasonCard('solare')}${seasonCard('legale')}</div><div class="section-heading"><div><h2>Celebrazioni particolari</h2><p>Le eccezioni pubblicate prevalgono sugli orari ordinari nella data indicata.</p></div></div><div class="mass-special-layout"><section class="panel">${special.length?special.map(x=>`<div class="mass-special-row"><div class="mass-special-date"><div class="overline">${dateFmt(x.date_on)}</div><h3>${esc(x.title)}</h3>${x.notes?`<p>${esc(x.notes)}</p>`:''}</div>${massTimesMarkup(x.times_text)}</div>`).join(''):'<div class="empty-state">Al momento non sono state pubblicate celebrazioni particolari.</div>'}</section><aside class="panel"><div class="overline">SACRAMENTI</div><h3 style="font:700 24px Georgia,serif;margin:12px 0">Riconciliazione</h3><p style="font-size:12px;color:#7a857b;line-height:1.8">Per gli orari ordinari delle confessioni, rivolgersi alla segreteria parrocchiale. Questa sezione sarà aggiornata con le informazioni ufficiali.</p><div class="soft-note" style="margin-top:20px">${I('info',16)} Per le festività e gli appuntamenti straordinari controlla sempre gli orari particolari.</div></aside></div>`}
+    const byOrder=(a,b)=>(Number(a.sort_order)||0)-(Number(b.sort_order)||0)||a.name.localeCompare(b.name,'it');
+    const allCategories=()=>[...content.song_categories].sort(byOrder);
+    const allSlots=(categoryId)=>[...content.song_slots].filter(s=>!categoryId||String(s.category_id)===String(categoryId)).sort(byOrder);
+    const publicCategories=()=>allCategories().filter(c=>c.published!==false);
+    const publicSlots=(categoryId)=>allSlots(categoryId).filter(s=>s.published!==false);
+    const getCategory=(id)=>content.song_categories.find(c=>String(c.id)===String(id));
+    const getSlot=(id)=>content.song_slots.find(s=>String(s.id)===String(id));
+    const publishedPlacementList=(categoryId,slotId)=>content.song_placements
+      .filter(p=>p.published!==false && (slotId?String(p.slot_id)===String(slotId):String(getSlot(p.slot_id)?.category_id)===String(categoryId)))
+      .map(p=>({...p,song:songs.find(s=>String(s.id)===String(p.song_id))}))
+      .filter(p=>p.song && getSlot(p.slot_id)?.published!==false && getCategory(getSlot(p.slot_id)?.category_id)?.published!==false)
+      .sort((a,b)=>(Number(a.sort_order)||0)-(Number(b.sort_order)||0)||a.song.name.localeCompare(b.song.name,'it'));
+    const songCountText=(count)=>count===1?'1 canto':count+' canti';
+    function songCrumbs(){const cat=getCategory(state.songService),slot=getSlot(state.songMoment);return `<nav class="song-crumbs" aria-label="Percorso del repertorio"><button data-action="song-home">Canti</button>${cat?`${I('chevron',12)}<button data-action="song-slots">${esc(cat.name)}</button>`:''}${slot?`${I('chevron',12)}<strong>${esc(slot.name)}</strong>`:''}</nav>`}
+    function canti(){
+      const intro=head('REPERTORI LITURGICI','Canti delle Messe','Scegli una categoria, poi un momento della liturgia per leggere i testi dei canti.');
+      const cats=publicCategories();
+      const cat=cats.find(c=>String(c.id)===String(state.songService));
+      if(!cat)return `${intro}${sampleBanner()}<div class="section-heading"><div><h2>Scegli il repertorio</h2><p>Le categorie vengono aggiornate dai responsabili della parrocchia.</p></div></div><div class="song-category-grid">${cats.length?cats.map((category,i)=>{const n=publishedPlacementList(category.id).length;return `<button class="song-service-card" data-song-service="${esc(category.id)}"><span class="symbol">${I(i===1?'users':'music',23)}</span><span class="song-service-name">${esc(category.name)}</span><span class="song-service-hint">${songCountText(n)} assegnati · ${publicSlots(category.id).length} momenti</span><span class="text-btn">Apri repertorio ${I('arrow',15)}</span></button>`}).join(''):'<div class="panel empty-state">I repertori non sono ancora stati pubblicati.</div>'}</div>`;
+      const slots=publicSlots(cat.id);
+      const slot=slots.find(s=>String(s.id)===String(state.songMoment));
+      if(!slot)return `${intro}${sampleBanner()}${songCrumbs()}<div class="section-heading"><div><h2>${esc(cat.name)}</h2><p>Seleziona un momento per leggere i canti disponibili.</p></div></div><div class="song-slots-grid">${slots.length?slots.map((sl,i)=>{const n=publishedPlacementList(cat.id,sl.id).length;return `<button class="song-slot-card" data-song-moment="${esc(sl.id)}"><span class="song-symbol">${I(i===1||i===2?'sparkle':'music',20)}</span><span class="song-slot-title">${esc(sl.name)}</span><span class="song-slot-count">${n?`${songCountText(n)} disponibili`:'Nessun canto inserito'} ${I('chevron',13)}</span></button>`}).join(''):'<div class="panel empty-state">Non ci sono ancora momenti pubblicati in questa categoria.</div>'}</div>`;
+      const arr=publishedPlacementList(cat.id,slot.id);
+      return `${intro}${sampleBanner()}${songCrumbs()}<div class="section-heading"><div><h2>${esc(slot.name)}</h2><p>${esc(cat.name)} · ${songCountText(arr.length)}</p></div><button class="btn btn-outline" data-action="song-slots">${I('chevronleft',15)} Tutti i momenti</button></div><section class="song-lyrics-list">${arr.length?arr.map(p=>`<article class="song-lyrics-card"><div class="overline">${esc(slot.name)} · ${esc(cat.name)}</div><h3>${esc(p.song.name)}</h3>${p.song.lyrics.trim()?`<div class="song-lyrics">${esc(p.song.lyrics)}</div>`:'<div class="song-lyrics-empty">Testo non ancora inserito dal responsabile.</div>'}<div class="song-foot"><button class="text-btn" data-song="${esc(p.song.id)}">Visualizza canto ${I('arrow',15)}</button><button class="heart-btn ${state.favs.includes(p.song.id)?'active':''}" data-fav="${esc(p.song.id)}" aria-label="${state.favs.includes(p.song.id)?'Rimuovi dai preferiti':'Aggiungi ai preferiti'}">${I('heart',20)}</button></div></article>`).join(''):'<div class="panel empty-state">Nessun canto pubblicato in questo momento. Gli amministratori possono assegnarlo tramite Programmi Messe.</div>'}</section><p class="minor" style="margin-top:18px">I testi completi devono essere inseriti soltanto se la parrocchia dispone delle necessarie autorizzazioni.</p>`;
+    }
     function meditazioni(){const list=content.reflections.filter(x=>x.published!==false).sort((a,b)=>(b.date_on||'').localeCompare(a.date_on||''));return `${head('PREGHIERA QUOTIDIANA','Un momento di silenzio','Uno spazio semplice per leggere, riflettere e ritrovare il senso della giornata.')}${sampleBanner()}${list.length?list.map(x=>`<article class="article" style="margin-bottom:18px"><div class="overline">MEDITAZIONE · ${x.date_on?dateFmt(x.date_on):''}</div><h2>${esc(x.title)}</h2>${esc(x.body||'').split(/\n\s*\n|\n/).filter(Boolean).map(p=>`<p>${p}</p>`).join('')}</article>`).join(''):'<div class="panel"><div class="empty-state">Non ci sono ancora meditazioni pubblicate.</div></div>'}`}
     function catechesi(){const groups=[['Leone','Secondo anno · S. M. Goretti','22 novembre · 6 dicembre · 20 dicembre'],['Angelo','Secondo anno · Maestre Pie, Rodari, A. Eufemi','22 novembre · 6 dicembre · 20 dicembre'],['Toro','Secondo anno · Anzio, Castellani, S. Barbara','29 novembre · 13 dicembre'],['Aquila','Secondo anno · Salvo d’Acquisto','29 novembre · 13 dicembre']];return `${head('PERCORSI DI FEDE','Catechesi e famiglie','Calendari, appuntamenti e comunicazioni per accompagnare bambini, ragazzi e genitori.')}${sampleBanner()}<div class="notice-banner">${I('info',16)} <span>Questa sezione è ancora un'anteprima: gruppi e date andranno confermati prima dell'uso ufficiale.</span></div><div class="family-card"><div><div class="category" style="color:#cddbc6">AREA RISERVATA · DEMO</div><h2>Uno spazio per ogni famiglia.</h2><p>In futuro ciascun genitore potrà vedere gli incontri del proprio gruppo, ricevere avvisi mirati e seguire le iscrizioni.</p></div><button class="btn btn-light" data-action="family-preview">Prova l'anteprima ${I('arrow',17)}</button></div><div class="split"><section class="panel"><div class="panel-header"><h3>Gruppi del secondo anno</h3>${I('users',20)}</div>${groups.map(([name,detail,dates])=>`<div class="group-mini"><div><div class="group-name">Gruppo ${name}</div><div class="group-detail">${detail}<br>Prossimi incontri: ${dates}</div></div><span class="label-tag">2026/27</span></div>`).join('')}</section><aside class="panel"><div class="overline">ISCRIZIONI</div><h3 style="font:700 26px Georgia,serif;margin:13px 0">Un accesso semplice, ma sicuro.</h3><p style="font-size:12px;line-height:1.8;color:#78847b">La versione definitiva permetterà ai responsabili autorizzati di gestire i moduli di iscrizione, con informazioni privacy e accessi separati per le famiglie.</p><div class="soft-note" style="margin:25px 0">${I('shield',16)} In questo prototipo non raccogliamo nomi di bambini, contatti né altri dati personali.</div><button class="btn btn-outline" data-action="registration-demo">Come funzioneranno le iscrizioni ${I('arrow',16)}</button></aside></div>`}
     function donazioni(){return `${head('SOSTIENI LA COMUNITÀ','Un piccolo gesto, un bene condiviso','Uno spazio dedicato alle offerte e ai progetti sostenuti dalla parrocchia.')}${sampleBanner()}<div class="cards2"><section class="donation-card"><span class="big-ic">${I('hand',25)}</span><h3>Bonifico bancario</h3><p>La parrocchia potrà pubblicare qui l'IBAN ufficiale e la causale, così chi desidera potrà sostenere le sue attività con un bonifico.</p><button class="btn btn-ghost" data-action="donation-demo">Coordinate da configurare ${I('info',16)}</button></section><section class="donation-card"><span class="big-ic">${I('heart',25)}</span><h3>Donazione online</h3><p>In una fase successiva potremo integrare una pagina di pagamento sicura, direttamente collegata alla parrocchia e non ai dispositivi dei volontari.</p><button class="btn btn-ghost" data-action="donation-demo">Pagamenti non ancora attivi ${I('info',16)}</button></section></div><div class="soft-note mt20">${I('shield',17)} Questo prototipo non riceve denaro, non chiede dati di pagamento e non dispone di coordinate bancarie reali.</div>`}
     const adminDefs={
       notices:{label:'Avvisi',singular:'avviso',fields:[['title','Titolo','text',120],['body','Testo dell’avviso','textarea',2000],['date_on','Data','date'],['category','Categoria','select', ['Comunità','Liturgia','Catechesi','Giovani']]]},
       events:{label:'Eventi',singular:'evento',fields:[['title','Titolo','text',120],['date_on','Data evento','date'],['time_of_day','Ora','time'],['location','Luogo','text',180],['category','Categoria','select',['Comunità','Liturgia','Catechesi','Giovani']]]},
-      songs:{label:'Canti',singular:'canto',fields:[['title','Titolo','text',150],['category','Momento liturgico','select',['Ingresso','Offertorio','Comunione','Acclamazione','Professione di fede','Altro']],['notes','Note (non inserire testi coperti da diritti senza autorizzazione)','textarea',1800]]},
+      songs:{label:'Canti',singular:'canto',fields:[['title','Titolo','text',150],['lyrics','Testo del canto (solo se autorizzato)','textarea',12000],['notes','Note (facoltative)','textarea',1800]]},
+      song_categories:{label:'Categorie canti',singular:'categoria',fields:[['name','Nome della categoria','text',120],['sort_order','Ordine di visualizzazione','number']]},
+      song_slots:{label:'Slot canti',singular:'momento / slot',fields:[['category_id','Categoria di appartenenza','category-select'],['name','Nome dello slot','text',100],['sort_order','Ordine nella categoria','number']]},
+      song_placements:{label:'Programmi Messe',singular:'assegnazione del canto',fields:[['song_id','Canto da inserire','song-select'],['category_select','Categoria','placement-category'],['slot_id','Momento della Messa','slot-select'],['sort_order','Ordine nello slot (0 = primo)','number']]},
       reflections:{label:'Meditazioni',singular:'meditazione',fields:[['title','Titolo','text',160],['date_on','Data','date'],['body','Testo della meditazione','textarea',8000]]},
-      mass_times:{label:'Orari Messe',singular:'orario',fields:[['day_label','Giorno / ricorrenza','text',100],['time_of_day','Orario','time'],['description','Descrizione','textarea',500],['sort_order','Ordine visualizzazione','number',999]]}
+      mass_schedule:{label:'Orari ordinari',singular:'orario ordinario',fields:[['season','Periodo','select',[['solare','Ora solare'],['legale','Ora legale']]],['day_type','Tipo di giorno','select',['Feriale / Prefestivo','Festivo']],['times_text','Orari (es. 08:00, 11:00, 17:30)','text',120]]},
+      mass_exceptions:{label:'Messe speciali',singular:'giorno particolare',fields:[['date_on','Data della celebrazione','date'],['title','Nome della ricorrenza','text',120],['times_text','Orari (es. 08:00, 11:00, 17:30)','text',120],['notes','Note / luogo (facoltative)','textarea',500]]}
     };
     const fieldVal=(v)=>v===undefined||v===null?'':String(v);
-    function adminField(f,item){const [key,label,type,opt]=f,value=key==='time_of_day'?fieldVal(item[key]).slice(0,5):fieldVal(item[key]),id='field-'+key,required=!['notes','description','sort_order'].includes(key);
+    function adminField(f,item){const [key,label,type,opt]=f,value=key==='time_of_day'?fieldVal(item[key]).slice(0,5):fieldVal(item[key]),id='field-'+key,required=!['notes','lyrics','description','sort_order'].includes(key);
       if(type==='textarea')return `<div class="field full"><label for="${id}">${esc(label)}</label><textarea id="${id}" name="${key}" ${required?'required':''} maxlength="${opt}" rows="5">${esc(value)}</textarea></div>`;
-      if(type==='select')return `<div class="field"><label for="${id}">${esc(label)}</label><select name="${key}" id="${id}">${opt.map(o=>`<option ${o===value?'selected':''}>${esc(o)}</option>`).join('')}</select></div>`;
+      if(type==='category-select' || type==='placement-category'){
+        const selected=type==='placement-category'?(getSlot(item.slot_id)?.category_id||allCategories()[0]?.id):value;
+        return `<div class="field"><label for="${id}">${esc(label)}</label><select name="${key}" id="${id}" required><option value="">Scegli una categoria...</option>${allCategories().map(c=>`<option value="${esc(c.id)}" ${String(c.id)===String(selected)?'selected':''}>${esc(c.name)}${c.published?'':' (nascosta)'}</option>`).join('')}</select></div>`;
+      }
+      if(type==='slot-select'){
+        const selectedCategory=getSlot(item.slot_id)?.category_id||allCategories()[0]?.id;
+        return `<div class="field"><label for="${id}">${esc(label)}</label><select name="${key}" id="${id}" required><option value="">Scegli uno slot...</option>${allSlots(selectedCategory).map(sl=>`<option value="${esc(sl.id)}" ${String(sl.id)===String(value)?'selected':''}>${esc(sl.name)}${sl.published?'':' (nascosto)'}</option>`).join('')}</select></div>`;
+      }
+      if(type==='song-select')return `<div class="field full"><label for="${id}">${esc(label)}</label><select name="${key}" id="${id}" required><option value="">Seleziona un canto...</option>${[...content.songs].sort((a,b)=>a.title.localeCompare(b.title,'it')).map(song=>`<option value="${esc(song.id)}" ${String(song.id)===value?'selected':''}>${esc(song.title)}${song.published?'':' (bozza)'}</option>`).join('')}</select></div>`;
+      if(type==='select')return `<div class="field"><label for="${id}">${esc(label)}</label><select name="${key}" id="${id}">${opt.map(o=>{const ov=Array.isArray(o)?o[0]:o,ol=Array.isArray(o)?o[1]:o;return `<option value="${esc(ov)}" ${ov===value?'selected':''}>${esc(ol)}</option>`}).join('')}</select></div>`;
       return `<div class="field ${key==='title'?'full':''}"><label for="${id}">${esc(label)}</label><input name="${key}" id="${id}" type="${type}" ${required?'required':''} ${typeof opt==='number'&&type==='text'?`maxlength="${opt}"`:''} ${type==='number'?'min="0" max="999"':''} value="${esc(value||(type==='date'?new Date().toISOString().slice(0,10):''))}"></div>`;
     }
-    function admin(){const t=state.adminType,def=adminDefs[t],list=content[t],item=list.find(x=>String(x.id)===String(state.editingId))||{},connected=cloud.enabled;
+    function admin(){const t=state.adminType,def=adminDefs[t],list=content[t],item=list.find(x=>String(x.id)===String(state.editingId))||{},connected=cloud.enabled,canStructure=!cloud.enabled||cloud.role==='admin';
       const hint=connected ? (cloud.loading?'Connessione al database in corso...':cloud.error?'Connessione non riuscita: '+cloud.error:'I contenuti pubblicati saranno immediatamente visibili online agli utenti.') : 'MODALITÀ DEMO: tutto ciò che modifichi qui rimane soltanto in questo browser.';
       if(connected&&!isEditor())return `${head('GESTIONE PARROCCHIALE','Pannello amministrativo','Accesso riservato ai collaboratori autorizzati.')}${sampleBanner()}<section class="panel admin-access"><div class="access-icon">${I('shield',26)}</div><h2>${cloud.loading?'Collegamento in corso':cloud.user?'Accesso non autorizzato':'Accedi come amministratore'}</h2><p>${esc(cloud.loading?'Verifica del collegamento e dei permessi...':cloud.user?'Account autenticato, ma non presente tra gli amministratori autorizzati. Verifica la tabella admin_members su Supabase.':'Accedi con l’email e la password dell’utente amministratore che hai creato in Supabase.')}</p>${!cloud.loading&&!cloud.user?`<form id="login-form" class="login-inline" autocomplete="on"><input name="email" type="email" required autocomplete="username" placeholder="Email amministratore" aria-label="Email amministratore"><input name="password" type="password" required minlength="6" autocomplete="current-password" placeholder="Password" aria-label="Password amministratore"><button class="btn btn-primary" type="submit">${I('shield',16)} Accedi</button></form><div class="login-help">Non condividere la password con nessuno. Se non riesci ad accedere, verifica prima la password in Supabase.</div>`:''}${cloud.user?`<button class="btn btn-outline" data-action="logout">Esci dall’account</button>`:''}<div class="soft-note" style="margin-top:18px">${I('shield',16)} Non è possibile registrarsi autonomamente come amministratore.</div></section>`;
-      return `${head('GESTIONE PARROCCHIALE','Pannello amministrativo','Crea e modifica i contenuti della parrocchia, scegliendo cosa pubblicare e cosa lasciare in bozza.')}${sampleBanner()}<div class="soft-note mb20">${I(connected?'check':'info',17)} <div><b>${connected?'Database collegato · '+esc(cloud.role):'Ambiente dimostrativo'}</b> — ${esc(hint)} ${connected?`<button class="inline-link" data-action="logout">Esci (${esc(cloud.user?.email||'account')})</button>`:''}</div></div><div class="admin-tabs">${tables.map(x=>`<button data-admintype="${x}" class="pill ${t===x?'active':''}">${esc(adminDefs[x].label)} <span class="tab-count">${content[x].length}</span></button>`).join('')}</div><div class="split"><section class="panel"><div class="panel-header"><h3>${item.id?'Modifica':'Nuovo'} ${esc(def.singular)}</h3>${I('edit',20)}</div><form id="content-form"><div class="form-grid">${def.fields.map(f=>adminField(f,item)).join('')}<div class="field full"><label class="publish-check"><input name="published" type="checkbox" ${item.published?'checked':''}> <span>Pubblica questo contenuto (se disattivo rimane una bozza visibile solo agli amministratori)</span></label></div></div><div class="form-actions"><button class="btn btn-primary" type="submit">${I('check',16)} ${item.id?'Salva modifiche':'Salva contenuto'}</button>${item.id?'<button class="btn btn-outline" type="button" data-action="cancel-edit">Annulla modifica</button>':''}</div></form></section><aside class="panel"><div class="panel-header"><h3>${esc(def.label)} inseriti</h3><span class="label-tag">${list.length}</span></div><div class="admin-items">${list.length?list.map(x=>`<div class="admin-entry"><div class="admin-entry-main"><span class="entry-status ${x.published?'is-public':'is-draft'}">${x.published?'Pubblicato':'Bozza'}</span><h4>${esc(x.title||x.day_label||'Senza titolo')}</h4><p>${esc(x.date_on||x.time_of_day||x.category||'')}</p></div><div class="admin-entry-buttons">${t==='notices'&&x.published&&connected?`<button class="icon-btn" data-push-send="${esc(x.id)}" aria-label="Invia notifica (una volta per avviso)" title="Invia notifica agli iscritti">${I('bell',16)}</button>`:''}<button class="icon-btn" data-edit="${esc(x.id)}" aria-label="Modifica">${I('edit',16)}</button><button class="icon-btn" data-delete="${esc(x.id)}" aria-label="Elimina">${I('trash',16)}</button></div></div>`).join(''):'<div class="empty-state">Nessun contenuto. Usa il modulo per aggiungerne uno.</div>'}</div></aside></div>`;
+      if(!canStructure && ['song_categories','song_slots'].includes(t)){
+        state.adminType='songs';state.editingId=null;return admin();
+      }
+      return `${head('GESTIONE PARROCCHIALE','Pannello amministrativo','Crea e modifica i contenuti della parrocchia, scegliendo cosa pubblicare e cosa lasciare in bozza.')}${sampleBanner()}<div class="soft-note mb20">${I(connected?'check':'info',17)} <div><b>${connected?'Database collegato · '+esc(cloud.role):'Ambiente dimostrativo'}</b> — ${esc(hint)} ${connected?`<button class="inline-link" data-action="logout">Esci (${esc(cloud.user?.email||'account')})</button>`:''}</div></div><div class="admin-tabs">${tables.filter(x=>canStructure||!['song_categories','song_slots'].includes(x)).map(x=>`<button data-admintype="${x}" class="pill ${t===x?'active':''}">${esc(adminDefs[x].label)} <span class="tab-count">${content[x].length}</span></button>`).join('')}</div><div class="split"><section class="panel"><div class="panel-header"><h3>${item.id?'Modifica':'Nuovo'} ${esc(def.singular)}</h3>${I('edit',20)}</div><form id="content-form"><div class="form-grid">${def.fields.map(f=>adminField(f,item)).join('')}${t==='song_categories'&&!item.id?'<div class="field full"><label class="publish-check"><input type="checkbox" name="auto_slots" checked> <span>Crea automaticamente gli 8 slot standard (potrai aggiungerli, modificarli o eliminarli)</span></label></div>':''}${t==='song_categories'||t==='song_slots'?'<p class="song-admin-help" style="grid-column:1/-1">Per togliere temporaneamente una categoria o uno slot dalla vista pubblica, disattiva <b>Pubblica</b> e salva. L’eliminazione definitiva rimuove anche le assegnazioni collegate, ma non cancella i testi dei canti.</p>':''}${t==='song_placements'?'<p class="song-admin-help" style="grid-column:1/-1">1. Crea il canto in <b>Canti</b> e inserisci il suo testo. 2. In <b>Programmi Messe</b> seleziona la Messa e il momento. Puoi assegnare lo stesso canto a più Messe o momenti.</p>':''}${t==='songs'?'<p class="song-admin-help" style="grid-column:1/-1">Inserisci il testo del canto solo se la parrocchia è autorizzata a pubblicarlo. Poi usa <b>Programmi Messe</b> per scegliere dove visualizzarlo.</p>':''}${t==='mass_schedule'?'<p class="minor" style="grid-column:1/-1">Per ogni combinazione di periodo e tipo di giorno deve esistere una sola scheda. Modifica quella presente per cambiare gli orari.</p>':''}${t==='mass_exceptions'?'<p class="minor" style="grid-column:1/-1">Gli orari particolari sostituiscono quelli ordinari solo nel giorno scelto. Usa una sola scheda per data.</p>':''}<div class="field full"><label class="publish-check"><input name="published" type="checkbox" ${item.published || (!item.id&&['song_categories','song_slots'].includes(t))?'checked':''}> <span>Pubblica questo contenuto (se disattivo rimane una bozza visibile solo agli amministratori)</span></label></div></div><div class="form-actions"><button class="btn btn-primary" type="submit">${I('check',16)} ${item.id?'Salva modifiche':'Salva contenuto'}</button>${item.id?'<button class="btn btn-outline" type="button" data-action="cancel-edit">Annulla modifica</button>':''}</div></form></section><aside class="panel"><div class="panel-header"><h3>${esc(def.label)} inseriti</h3><span class="label-tag">${list.length}</span></div><div class="admin-items">${list.length?list.map(x=>`<div class="admin-entry"><div class="admin-entry-main"><span class="entry-status ${x.published?'is-public':'is-draft'}">${x.published?'Pubblicato':'Bozza'}</span><h4>${esc(x.title||x.name||(t==='song_placements'?(content.songs.find(song=>String(song.id)===String(x.song_id))?.title||'Canto eliminato'):null)||(t==='mass_schedule'?(x.season==='solare'?'Ora solare':'Ora legale')+' · '+x.day_type:x.day_label)||'Senza titolo')}</h4><p>${esc(t==='song_placements'?((getCategory(getSlot(x.slot_id)?.category_id)?.name||'Categoria non trovata')+' · '+(getSlot(x.slot_id)?.name||'Slot eliminato')):t==='song_slots'?(getCategory(x.category_id)?.name||'Categoria non trovata'):t==='song_categories'?(allSlots(x.id).length+' momenti'):(x.date_on||x.times_text||x.time_of_day||x.category||''))}</p></div><div class="admin-entry-buttons">${t==='notices'&&x.published&&connected?`<button class="icon-btn" data-push-send="${esc(x.id)}" aria-label="Invia notifica (una volta per avviso)" title="Invia notifica agli iscritti">${I('bell',16)}</button>`:''}<button class="icon-btn" data-edit="${esc(x.id)}" aria-label="Modifica">${I('edit',16)}</button><button class="icon-btn" data-delete="${esc(x.id)}" aria-label="Elimina">${I('trash',16)}</button></div></div>`).join(''):'<div class="empty-state">Nessun contenuto. Usa il modulo per aggiungerne uno.</div>'}</div></aside></div>`;
     }
     function nextEventCard(){const next=events.filter(e=>e.date>=new Date().toISOString().slice(0,10)).sort((a,b)=>(a.date+' '+a.time).localeCompare(b.date+' '+b.time))[0];return next?`<div class="panel event-panel"><div class="event-date">${I('calendar',17)} ${dateFmt(next.date)} · ${esc(next.time)}</div><h3>${esc(next.title)}</h3><p>Prossimo appuntamento della comunità.</p><div class="event-meta">${I('pin',18)} ${esc(next.where||'Luogo da definire')}</div><button class="btn btn-primary" style="align-self:flex-start;margin-top:12px" data-go="calendario">Vedi nel calendario ${I('arrow',16)}</button></div>`:`<div class="panel event-panel"><div class="event-date">${I('calendar',17)} CALENDARIO</div><h3>Nuovi appuntamenti in arrivo</h3><p>Le iniziative della parrocchia saranno pubblicate qui.</p><button class="btn btn-primary" style="align-self:flex-start;margin-top:12px" data-go="calendario">Apri calendario ${I('arrow',16)}</button></div>`}
     async function connectCloud(){
@@ -545,7 +682,30 @@
     }
     async function signIn(email,password){if(!cloud.client)throw new Error('Database non collegato.');const {data,error}=await cloud.client.auth.signInWithPassword({email,password});if(error)throw error;if(!data?.user)throw new Error('Accesso non riuscito.');cloud.user=data.user;state.page='admin';history.replaceState(null,'','#admin');await loadCloud();if(!isEditor())throw new Error('Accesso eseguito, ma l’utente non è abilitato nella tabella admin_members.');}
     async function logOut(){if(!cloud.client)return;const {error}=await cloud.client.auth.signOut();if(error)throw error;cloud.user=null;cloud.role=null;await loadCloud();}
-    const buildPayload=(t,fd)=>{const o={};for(const [k,,type] of adminDefs[t].fields){let v=String(fd.get(k)||'').trim();o[k]=type==='number'?Number(v||0):v;}o.published=fd.has('published');if(t==='notices')o.audience='public';return o};
+    function normalizeMassTimes(raw){
+      const parts=String(raw||'').replace(/\./g,':').split(/[;,]/).map(x=>x.trim()).filter(Boolean);
+      if(!parts.length||parts.length>12)throw new Error('Inserisci da 1 a 12 orari, separati da virgola (es. 08:00, 11:00, 17:30).');
+      const times=parts.map(t=>{const match=t.match(/^(\d{1,2})(?::(\d{2}))?$/);if(!match)throw new Error('Orario non valido: '+t+'. Usa HH:MM, separando le Messe con una virgola.');const h=Number(match[1]),m=Number(match[2]||'0');if(h>23||m>59)throw new Error('Orario non valido: '+t);return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')});
+      if(new Set(times).size!==times.length)throw new Error('Hai inserito due volte lo stesso orario.');
+      return times.sort().join(', ');
+    }
+    const buildPayload=(t,fd)=>{
+      const o={};
+      for(const [k,,type] of adminDefs[t].fields){
+        if(k==='category_select')continue; // campo UI, non colonna del database
+        let v=String(fd.get(k)||'').trim();
+        o[k]=type==='number'?Number(v||0):k==='times_text'?normalizeMassTimes(v):v;
+      }
+      o.published=fd.has('published');if(t==='notices')o.audience='public';
+      if(t==='song_categories'||t==='song_slots'){
+        const name=String(o.name||'').trim();if(!name)throw new Error('Inserisci il nome.');o.name=name;
+      }
+      if(t==='song_placements'){
+        const cat=String(fd.get('category_select')||'');
+        if(!o.slot_id||String(getSlot(o.slot_id)?.category_id)!==cat)throw new Error('Seleziona una categoria e un momento validi.');
+      }
+      return o;
+    };
     async function saveContent(fd){
       const t=state.adminType,record=buildPayload(t,fd),edit=state.editingId;
       const previous=edit?content[t].find(x=>String(x.id)===String(edit)):null;
@@ -556,6 +716,11 @@
         const {data,error}=await q.select('id').single();
         if(error)throw error;
         savedId=data.id;
+        if(t==='song_categories'&&!edit&&fd.has('auto_slots')){
+          const rows=SONG_MOMENTS.map((name,i)=>({category_id:savedId,name,sort_order:i,published:true}));
+          const {error:slotsError}=await cloud.client.from('song_slots').insert(rows);
+          if(slotsError){await loadCloud();throw new Error('Categoria creata, ma gli 8 slot non sono stati creati: '+slotsError.message);}
+        }
         await loadCloud();
         if(t==='notices'&&record.published&&!previous?.published){
           try{
@@ -565,23 +730,61 @@
         }
       }else {
         if(edit){const i=content[t].findIndex(x=>x.id===edit);if(i<0)throw new Error('Elemento non trovato');content[t][i]={...content[t][i],...record}}
-        else content[t].unshift({...record,id:(crypto.randomUUID?crypto.randomUUID():'demo-'+Date.now()+'-'+Math.random().toString(16).slice(2))});
+        else {
+          savedId=(crypto.randomUUID?crypto.randomUUID():'demo-'+Date.now()+'-'+Math.random().toString(16).slice(2));
+          content[t].unshift({...record,id:savedId});
+        }
+        if(t==='song_categories'&&!edit&&fd.has('auto_slots')){
+          content.song_slots.push(...SONG_MOMENTS.map((name,i)=>({id:'demo-slot-'+savedId+'-'+i,category_id:savedId,name,sort_order:i,published:true})));
+        }
         saveDemo();
       }
       state.editingId=null;
       toast('Contenuto salvato '+(cloud.enabled?'nel database.':'nella demo locale.')+noticeDispatch);
     }
-    async function deleteContent(t,id){if(cloud.enabled){if(!isEditor())throw new Error('Non autorizzato');const {error}=await cloud.client.from(t).delete().eq('id',id);if(error)throw error;await loadCloud();}else {content[t]=content[t].filter(x=>String(x.id)!==String(id));saveDemo();}state.editingId=null;toast('Contenuto eliminato.');}
+    async function deleteContent(t,id){
+      if(cloud.enabled){if(!isEditor())throw new Error('Non autorizzato');if(['song_categories','song_slots'].includes(t)&&cloud.role!=='admin')throw new Error('Solo un amministratore può eliminare categorie o slot.');const {error}=await cloud.client.from(t).delete().eq('id',id);if(error)throw error;await loadCloud();}
+      else {
+        content[t]=content[t].filter(x=>String(x.id)!==String(id));
+        if(t==='songs')content.song_placements=content.song_placements.filter(p=>String(p.song_id)!==String(id));
+        if(t==='song_categories'){
+          const removedIds=content.song_slots.filter(s=>String(s.category_id)===String(id)).map(s=>String(s.id));
+          content.song_slots=content.song_slots.filter(s=>String(s.category_id)!==String(id));
+          content.song_placements=content.song_placements.filter(p=>!removedIds.includes(String(p.slot_id)));
+          if(String(state.songService)===String(id)){state.songService=null;state.songMoment=null;}
+        }
+        if(t==='song_slots'){
+          content.song_placements=content.song_placements.filter(p=>String(p.slot_id)!==String(id));
+          if(String(state.songMoment)===String(id))state.songMoment=null;
+        }
+        saveDemo();
+      }
+      state.editingId=null;toast('Elemento eliminato. I testi dei canti non sono stati cancellati.');
+    }
+    function confirmDelete(t,id){
+      let message='Eliminare definitivamente questo contenuto?';
+      if(t==='song_categories'){
+        const slots=allSlots(id),ids=new Set(slots.map(x=>String(x.id)));
+        const used=content.song_placements.filter(p=>ids.has(String(p.slot_id))).length;
+        message=`Eliminare definitivamente questa categoria? Verranno cancellati anche ${slots.length} slot e ${used} assegnazioni. I testi dei canti resteranno disponibili.\n\nPer conservarli per l'anno prossimo, modifica la categoria e togli la spunta Pubblica.`;
+      }else if(t==='song_slots'){
+        const used=content.song_placements.filter(p=>String(p.slot_id)===String(id)).length;
+        message=`Eliminare definitivamente questo slot e le sue ${used} assegnazioni? I testi dei canti resteranno disponibili.\n\nPer nasconderlo temporaneamente, togli la spunta Pubblica.`;
+      }
+      if(window.confirm(message))deleteContent(t,id).catch(showError);
+    }
     function showError(err){console.error(err);toast('Errore: '+(err?.message||String(err)).slice(0,160))}
-    const renderModal=()=>{const m=state.modal;let title='',body='',label='';if(m.type==='notice'){let n=allNotices().find(x=>x.id===m.id);if(!n)return '';title=esc(n.title);label=esc(n.cat)+' · '+dateFmt(n.date);body=`<p>${esc(n.desc)}</p><div class="soft-note">${I('users',16)} Destinatari: ${esc(n.audience||'Tutta la comunità')}</div>`}else if(m.type==='song'){let s=songs.find(x=>x.id===m.id);if(!s)return '';title=esc(s.name);label=esc(s.type);body=`<p>${esc(s.note||'Scheda del canto in preparazione.')}</p><div class="soft-note">${I('music',16)} Testi e spartiti saranno disponibili solo quando autorizzati.</div>`}else if(m.type==='family'){title='Area famiglia · anteprima';label='SIMULAZIONE';body=`<div class="group-mini"><div><div class="group-name">Gruppo Aquila · secondo anno</div><div class="group-detail">Demo senza dati di una famiglia reale</div></div><span class="label-tag">Esempio</span></div><div class="day-evt"><strong>29 novembre · 10:00</strong><p>Incontro catechesi del gruppo Aquila</p></div><div class="day-evt"><strong>13 dicembre · 10:00</strong><p>Incontro catechesi del gruppo Aquila</p></div><div class="soft-note">${I('shield',16)} La registrazione e l'accesso vero dei genitori saranno attivati solo con autenticazione e informative adeguate.</div>`}else if(m.type==='registration'){title='Iscrizioni alla catechesi';label='FUNZIONE FUTURA';body=`<p>Il genitore potrà accedere con il proprio account, scegliere il percorso, compilare il modulo richiesto dalla parrocchia e ricevere conferma dal responsabile.</p><div class="soft-note">${I('shield',16)} In questa demo non chiediamo né salviamo dati di minori.</div>`}else if(m.type==='donation'){title='Donazioni non ancora attive';label='FUNZIONE FUTURA';body='<p>Per accettare bonifici o pagamenti online serviranno le coordinate ufficiali e la configurazione del servizio di pagamento intestato all’ente.</p>'}return `<div class="modal-backdrop" data-action="modal-backdrop"><div class="modal" role="dialog" aria-modal="true" aria-label="${title}"><button class="icon-btn close" data-action="close-modal" aria-label="Chiudi">${I('close',18)}</button><div class="overline">${label}</div><h2>${title}</h2>${body}<div class="form-actions"><button class="btn btn-primary" data-action="close-modal">Chiudi</button></div></div></div>`};
+    const renderModal=()=>{const m=state.modal;let title='',body='',label='';if(m.type==='notice'){let n=allNotices().find(x=>x.id===m.id);if(!n)return '';title=esc(n.title);label=esc(n.cat)+' · '+dateFmt(n.date);body=`<p>${esc(n.desc)}</p><div class="soft-note">${I('users',16)} Destinatari: ${esc(n.audience||'Tutta la comunità')}</div>`}else if(m.type==='song'){let s=songs.find(x=>x.id===m.id);if(!s)return '';title=esc(s.name);label='TESTO DEL CANTO';body=s.lyrics.trim()?`<div class="song-lyrics">${esc(s.lyrics)}</div>`:'<p>Testo non ancora disponibile.</p>';if(s.note)body+=`<div class="soft-note">${I('info',16)} ${esc(s.note)}</div>`}else if(m.type==='family'){title='Area famiglia · anteprima';label='SIMULAZIONE';body=`<div class="group-mini"><div><div class="group-name">Gruppo Aquila · secondo anno</div><div class="group-detail">Demo senza dati di una famiglia reale</div></div><span class="label-tag">Esempio</span></div><div class="day-evt"><strong>29 novembre · 10:00</strong><p>Incontro catechesi del gruppo Aquila</p></div><div class="day-evt"><strong>13 dicembre · 10:00</strong><p>Incontro catechesi del gruppo Aquila</p></div><div class="soft-note">${I('shield',16)} La registrazione e l'accesso vero dei genitori saranno attivati solo con autenticazione e informative adeguate.</div>`}else if(m.type==='registration'){title='Iscrizioni alla catechesi';label='FUNZIONE FUTURA';body=`<p>Il genitore potrà accedere con il proprio account, scegliere il percorso, compilare il modulo richiesto dalla parrocchia e ricevere conferma dal responsabile.</p><div class="soft-note">${I('shield',16)} In questa demo non chiediamo né salviamo dati di minori.</div>`}else if(m.type==='donation'){title='Donazioni non ancora attive';label='FUNZIONE FUTURA';body='<p>Per accettare bonifici o pagamenti online serviranno le coordinate ufficiali e la configurazione del servizio di pagamento intestato all’ente.</p>'}return `<div class="modal-backdrop" data-action="modal-backdrop"><div class="modal" role="dialog" aria-modal="true" aria-label="${title}"><button class="icon-btn close" data-action="close-modal" aria-label="Chiudi">${I('close',18)}</button><div class="overline">${label}</div><h2>${title}</h2>${body}<div class="form-actions"><button class="btn btn-primary" data-action="close-modal">Chiudi</button></div></div></div>`};
     const pageFns={home,avvisi,calendario,messe,canti,meditazioni,catechesi,donazioni,admin};
     function render(opts={}){const app=document.getElementById('app');let active=document.activeElement,id=active&&active.id,pos=active&&typeof active.selectionStart==='number'?active.selectionStart:null;app.innerHTML=shell((pageFns[state.page]||home)());if(opts.keepFocus&&id){let el=document.getElementById(id);if(el){el.focus();try{el.setSelectionRange(pos,pos)}catch{}}}}
-    function go(p){if(!pageFns[p])p='home';state.page=p;state.more=false;state.modal=null;history.replaceState(null,'','#'+p);render();window.scrollTo({top:0,behavior:'instant'})}
+    function go(p){if(!pageFns[p])p='home';if(p==='canti'&&state.page!=='canti'){state.songService=null;state.songMoment=null;}state.page=p;state.more=false;state.modal=null;history.replaceState(null,'','#'+p);render();window.scrollTo({top:0,behavior:'instant'})}
     function toast(msg){state.toast=msg;render();setTimeout(()=>{if(state.toast===msg){state.toast=null;let t=document.querySelector('.toast');if(t)t.remove()}},3400)}
     const dtAdd=(v)=>{let n=new Date(state.year,state.month+v,1);state.year=n.getFullYear();state.month=n.getMonth();state.selectedDate=`${state.year}-${String(state.month+1).padStart(2,'0')}-01`};
     document.addEventListener('click',e=>{const button=e.target.closest('button,[data-action]');if(!button)return;
       if(button.hasAttribute('data-go')){go(button.dataset.go);return}
       if(button.hasAttribute('data-notice')){state.modal={type:'notice',id:button.dataset.notice};render();return}
+      if(button.hasAttribute('data-song-service')){state.songService=button.dataset.songService;state.songMoment=null;render();return}
+      if(button.hasAttribute('data-song-moment')){state.songMoment=button.dataset.songMoment;render();return}
       if(button.hasAttribute('data-song')){state.modal={type:'song',id:button.dataset.song};render();return}
       if(button.hasAttribute('data-filter')){state.filter=button.dataset.filter;render();return}
       if(button.hasAttribute('data-songfilter')){state.songFilter=button.dataset.songfilter;render();return}
@@ -589,9 +792,9 @@
       if(button.hasAttribute('data-admintype')){state.adminType=button.dataset.admintype;state.editingId=null;render();return}
       if(button.hasAttribute('data-edit')){state.editingId=button.dataset.edit;render();window.scrollTo({top:0,behavior:'smooth'});return}
       if(button.hasAttribute('data-push-send')){sendPushNotification(button.dataset.pushSend).then(r=>toast(r.alreadySent?'Notifica già inviata per questo avviso.':r.reason||('Notifiche inviate: '+r.sent+'; non riuscite: '+r.failed))).catch(showError);return}
-      if(button.hasAttribute('data-delete')){if(window.confirm('Eliminare definitivamente questo contenuto?'))deleteContent(state.adminType,button.dataset.delete).catch(showError);return}
+      if(button.hasAttribute('data-delete')){confirmDelete(state.adminType,button.dataset.delete);return}
       if(button.hasAttribute('data-fav')){let id=button.dataset.fav;state.favs=state.favs.includes(id)?state.favs.filter(x=>x!==id):[...state.favs,id];saveStored(FAV,state.favs);render();return}
-      switch(button.dataset.action){case 'attiva-push':enablePush();break;case 'disattiva-push':disablePush();break;case 'toggle-theme':state.theme=state.theme==='vivace'?'sobrio':'vivace';document.documentElement.dataset.theme=state.theme;saveStored(THEME,state.theme);render();break;
+      switch(button.dataset.action){case 'song-home':state.songService=null;state.songMoment=null;render();break;case 'song-slots':state.songMoment=null;render();break;case 'attiva-push':enablePush();break;case 'disattiva-push':disablePush();break;case 'toggle-theme':state.theme=state.theme==='vivace'?'sobrio':'vivace';document.documentElement.dataset.theme=state.theme;saveStored(THEME,state.theme);render();break;
         case 'more':state.more=!state.more;render();break;case 'prev-month':dtAdd(-1);render();break;case 'next-month':dtAdd(1);render();break;
         case 'family-preview':state.modal={type:'family'};render();break;case 'registration-demo':state.modal={type:'registration'};render();break;
         case 'donation-demo':state.modal={type:'donation'};render();break;case 'close-modal':state.modal=null;render();break;
@@ -600,6 +803,15 @@
         case 'modal-backdrop':if(e.target===button){state.modal=null;render()}break;default:break}
     });
     document.addEventListener('input',e=>{if(e.target.id==='notice-search'){state.search=e.target.value;render({keepFocus:true})}if(e.target.id==='song-search'){state.songSearch=e.target.value;render({keepFocus:true})}});
+    document.addEventListener('change',e=>{
+      if(e.target.id==='mass-date'&&/^\d{4}-\d{2}-\d{2}$/.test(e.target.value)){state.massDate=e.target.value;render();}
+      if(e.target.id==='field-category_select'){
+        const slotSelect=document.getElementById('field-slot_id');
+        if(slotSelect){
+          slotSelect.innerHTML='<option value="">Scegli uno slot...</option>'+allSlots(e.target.value).map(sl=>`<option value="${esc(sl.id)}">${esc(sl.name)}${sl.published?'':' (nascosto)'}</option>`).join('');
+        }
+      }
+    });
     document.addEventListener('submit',e=>{if(!['content-form','login-form'].includes(e.target.id))return;e.preventDefault();
       const fd=new FormData(e.target),submit=e.target.querySelector('button[type=submit]');if(submit){submit.disabled=true;submit.textContent='Operazione in corso...';}
       if(e.target.id==='content-form'){saveContent(fd).catch(showError).finally(()=>{if(submit?.isConnected){submit.disabled=false;render()}});}

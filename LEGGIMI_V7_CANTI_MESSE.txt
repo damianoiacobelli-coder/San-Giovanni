@@ -1,0 +1,41 @@
+SAN GIOVANNI NETTUNO – VERSIONE 7 (orari Messe + repertori Canti)
+
+COSA CAMBIA
+- Stessa grafica vivace e navigazione della v6.
+- Orari Messe della v6: ora solare/legale, feste particolari.
+- Sezione Canti: Messa Vespertina Sabato; Messa domenicale dei ragazzi; Messa Domenica ore 11.
+- Ogni Messa mostra 8 slot: Ingresso, Gloria, Alleluia, Offertorio, Santo,
+  Agnello di Dio, Comunione, Finale.
+- Clicca su uno slot per leggere subito i testi di UNO O PIÙ canti assegnati.
+- Lo stesso canto può essere assegnato a più Messe e momenti senza duplicare il testo.
+- Nessun testo coperto da diritto d'autore viene fornito: nella demo locale
+  ci sono solo brevi versi dimostrativi originali; nell'app pubblica i repertori
+  restano vuoti finché l'amministratore non inserisce i canti e le assegnazioni.
+
+ATTIVAZIONE SENZA PERDERE DATI
+1. Supabase -> SQL Editor:
+  A. Se non hai ANCORA eseguito sql/02_orari_messe.sql, esegui SOLO:
+     sql/02_03_aggiornamenti_v7_completo.sql
+  B. Se hai GIÀ eseguito sql/02_orari_messe.sql, esegui SOLO:
+     sql/03_canti_messe.sql
+   Attendi il messaggio Success. Gli script sono additivi; non cancellano canti o avvisi.
+2. Estrai questo ZIP. Nel repository GitHub esistente sostituisci/aggiungi
+   i file e le cartelle presenti (public, netlify, scripts, sql, netlify.toml,
+   package.json). NON creare una sottocartella extra.
+3. Commit su main -> Netlify esegue il deploy -> Published.
+4. Apri la pagina Canti, scegli la Messa e clicca un momento liturgico.
+5. Accedi a Amministrazione:
+   - 'Canti': crea o aggiorna un canto inserendo TITOLO e TESTO, pubblicalo.
+   - 'Programmi Messe': seleziona CANTO + MESSA + MOMENTO + ORDINE,
+     attiva Pubblica e salva.
+   - Per inserire due canti nello stesso momento, crea due assegnazioni.
+   - Puoi riutilizzare lo stesso canto in Messa diverse con nuove assegnazioni.
+
+IMPORTANTE
+- Le tabelle e i vecchi dati (avvisi, eventi, orari, notifiche) non sono cancellati.
+- I testi di canti vanno pubblicati solo se la parrocchia dispone dei diritti necessari.
+- Le assegnazioni pubblicate sono visibili solo per canti anch'essi pubblicati.
+- Le regole RLS impediscono a visitatori anonimi di modificare i dati.
+- Le funzioni push e le variabili Netlify restano invariate.
+- La connessione online Supabase non è verificabile da questo ambiente.
+- In caso di eventuali errori fai uno screenshot della console o del messaggio.

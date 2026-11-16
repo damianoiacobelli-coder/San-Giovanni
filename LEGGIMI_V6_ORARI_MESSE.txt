@@ -1,0 +1,44 @@
+SAN GIOVANNI NETTUNO v6 — ORARI DELLE MESSE
+
+Aggiornamento della v5: mantiene grafica, navigazione, avvisi e notifiche.
+
+NOVITÀ
+- Calendario ordinario ora solare / ora legale con cambio automatico Europe/Rome
+- Feriali / prefestivi: 17:30 (solare) o 18:30 (legale)
+- Festivi: 08:00, 11:00, 17:30 (solare) / 08:00, 11:00, 18:30 (legale)
+- Selettore data: mostra l'orario valido in quel giorno
+- Messe speciali (Natale, ecc.): per data, prevalgono sugli orari ordinari
+- Nuove schede amministrazione: "Orari ordinari" e "Messe speciali"
+
+COME AGGIORNARE SENZA PERDERE I CONTENUTI
+1) Supabase > SQL Editor > New query
+2) Incollare ed eseguire sql/02_orari_messe.sql. Deve apparire Success.
+   Questo script NON modifica le tabelle vecchie e non elimina dati.
+3) Nel repository GitHub esistente sostituire/aggiungere tutti i file
+   con quelli di questa cartella (NON caricare il file ZIP come unico file).
+4) Netlify pubblica automaticamente quando il commit arriva su main.
+   Verificare nella sezione Deploys lo stato Published.
+5) Aprire https://sangiovanni.netlify.app/ e fare un hard refresh.
+6) Aprire "Orari Messe". Prova: 25 dicembre 2026 (Natale sarà solo
+   una bozza finché l'amministratore non la pubblicherà).
+7) Accedere in Amministrazione > Messe speciali, modificare la bozza
+   Natale e selezionare Pubblica dopo conferma degli orari.
+
+DATI PARTICOLARI
+- Per ogni singola data si può inserire un solo record, con tutti gli
+  orari in un campo: es. "08:00, 11:00, 17:30".
+- Per date particolari la scheda pubblicata SOSTITUISCE la regola ordinaria.
+- "Orari ordinari": modificare le quattro righe già caricate anziché
+  crearne di nuove con la stessa combinazione.
+- Il passaggio da ora solare a ora legale avviene automaticamente:
+  ultima domenica di marzo / ultima domenica di ottobre.
+- Un'eventuale vigilia festiva in un giorno feriale va inserita
+  come "Messa speciale" per la data corrispondente.
+- Non cancellare il file sql/01_notifiche_push.sql: serve per allestire
+  un nuovo ambiente, ma NON va rieseguito per questo aggiornamento.
+
+SICUREZZA
+- Nessuna chiave segreta è stata aggiunta ai file.
+- Le due nuove tabelle usano RLS: visitatori leggono solo i record pubblicati.
+- Le vecchie tabelle restano intatte, inclusa mass_times per compatibilità.
+- Questo pacchetto NON modifica le variabili d'ambiente Netlify.

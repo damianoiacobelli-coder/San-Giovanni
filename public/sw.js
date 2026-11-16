@@ -1,5 +1,5 @@
-// San Giovanni v5 – service worker per PWA + notifiche push.
-const CACHE='san-giovanni-v5-static';
+// San Giovanni v8 – service worker per PWA + notifiche push.
+const CACHE='san-giovanni-v8-static';
 const FILES=['./','./index.html','./config.js','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{

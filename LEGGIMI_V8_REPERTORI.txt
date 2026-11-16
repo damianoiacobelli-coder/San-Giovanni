@@ -1,0 +1,38 @@
+SAN GIOVANNI NETTUNO — VERSIONE 8 — CATEGORIE E SLOT PERSONALIZZABILI
+
+NOVITÀ
+• Amministrazione > Categorie canti: aggiungi, rinomina, ordina, pubblica/nascondi o elimina una macrocategoria (es. Canti Natale).
+• Aggiungendo una categoria puoi far creare automaticamente gli 8 slot standard; la spunta è facoltativa.
+• Amministrazione > Slot canti: aggiungi, rinomina, riordina, nascondi o elimina momenti in una singola categoria (Ingresso, Gloria, ecc.).
+• Amministrazione > Canti: i testi rimangono indipendenti dalle categorie e dagli slot.
+• Amministrazione > Programmi Messe: scegli il canto, la categoria e il momento; è possibile associare più canti allo stesso slot.
+• Nella pagina pubblica Canti si vedono solo categorie, slot e assegnazioni pubblicati.
+• Per categorie stagionali (Canti Natale) consigliamo NASCONDI anziché eliminare: la scheda e tutti i collegamenti rimangono pronti per riattivarla.
+• L'eliminazione definitiva di una categoria cancella i suoi slot e le assegnazioni corrispondenti; NON cancella i canti e i loro testi.
+• Categorie e slot possono essere modificati strutturalmente solo da admin; gli editor restano autorizzati ai contenuti.
+
+COME INSTALLARE SENZA PERDERE DATI
+1) Verifica che la v5 (notifiche) sia già attiva come prima. Nessuna modifica alle funzioni push/chiavi.
+2) Supabase SQL Editor: scegli UNO script secondo la situazione:
+   A. Hai già eseguito lo SQL della v7? Esegui SOLO sql/04_repertori_dinamici.sql
+   B. Hai eseguito solo la v6? Esegui sql/03_canti_messe.sql E POI sql/04_repertori_dinamici.sql
+   C. Non hai eseguito né SQL v6 né v7? Esegui SOLO sql/02_03_04_aggiornamenti_v8_completo.sql
+   Attendi "Success". Gli SQL includono RLS e una migrazione delle assegnazioni preesistenti.
+3) Estrai l'intero ZIP. Carica i contenuti della cartella principale nel repository GitHub ESISTENTE:
+   public/, netlify/, scripts/, sql/, netlify.toml, package.json, leggimi.
+   Sostituisci i vecchi file omonimi, senza creare sottocartelle aggiuntive.
+   NON caricare mai chiavi VAPID private, segreti Supabase o file .env.
+4) Commit su main; Netlify pubblica automaticamente. Controlla lo stato "Published".
+5) Ricarica il sito (eventualmente chiudi e riapri la PWA), accedi come amministratore e prova:
+   - Categorie canti > Nuova categoria: Canti Natale; lascia attiva la copia degli 8 slot e "Pubblica".
+   - Slot canti > Aggiungi un nuovo slot come "Salmo responsoriale" per Canti Natale.
+   - Canti > Salva un canto autorizzato con il testo.
+   - Programmi Messe > Assegna il canto al nuovo slot e pubblica l'assegnazione.
+   - Apri Canti da un altro dispositivo: categoria > slot > testo.
+   - Disattiva "Pubblica" sulla categoria Natale: il repertorio sparisce dalla pagina pubblica, ma resta nel pannello admin.
+
+NOTE
+- Non annulla né riscrive gli avvisi già pubblicati, le celebrazioni e i testi dei canti.
+- La demo locale usa dati fittizi e permette di provare i flussi senza toccare Supabase.
+- Il collegamento a Supabase live e i permessi reali saranno da verificare con il progetto online.
+- Pubblica solo testi musicali per cui la parrocchia possiede il diritto o un'autorizzazione alla diffusione.
