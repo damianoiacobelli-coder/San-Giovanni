@@ -1,0 +1,47 @@
+SAN GIOVANNI · NETTUNO — VERSIONE 10 · CALENDARI CATECHESI
+==========================================================
+
+NOVITÀ
+- Sezione pubblica Catechesi: filtri per percorso e gruppo, agenda e incontri annullati.
+- I nuovi incontri appaiono anche nel calendario generale, senza duplicarli manualmente.
+- Amministrazione > Catechesi > Gruppi: crea/aggiorna/nasconde gruppi.
+- Amministrazione > Catechesi > Calendari e incontri: una data o molte date insieme.
+- Se un incontro è cancellato, imposta Stato = Annullato. I genitori vedranno
+  l'annullamento nel calendario pubblico; le notifiche mirate NON sono ancora attive.
+- NESSUNA informazione anagrafica dei bambini viene richiesta o raccolta.
+
+COME AGGIORNARE, SENZA CANCELLARE GLI AVVISI ESISTENTI
+1) In Supabase > SQL Editor esegui SOLO sql/06_calendari_catechesi.sql
+   (presuppone che lo SQL v9 sia stato già eseguito; il file è ripetibile).
+2) Estrai questo pacchetto e carica nel repository GitHub esistente tutti i
+   file e sottocartelle, mantenendo la struttura nella root.
+3) Attendi su Netlify > Deploys lo stato Published.
+4) Entra in Amministrazione > Catechesi > Gruppi e crea, per esempio,
+   Gruppo Aquila, Secondo anno, 2026/27; spunta Pubblica, poi salva.
+5) Apri Calendari e incontri: seleziona il gruppo, immetti titolo e ora.
+   Per molte date, incolla nel riquadro (una data per riga):
+     29/11/2026
+     13/12/2026
+   (Oppure formato AAAA-MM-GG.) Il campo 'Data incontro singolo'
+   può rimanere vuoto. Salva: vengono create due schede indipendenti.
+6) Verifica il risultato nella pagina pubblica Catechesi e in Calendario.
+
+ESEMPIO (SOLO DEMO)
+- Leone e Angelo: 22/11, 06/12, 20/12/2026.
+- Toro e Aquila: 29/11, 13/12/2026.
+Questi esempi compaiono SOLO nella demo locale, NON vengono pubblicati
+nel database reale. Le date possono essere adattate dall'amministratore.
+
+PER ANNULLARE UN INCONTRO
+- Amministrazione > Catechesi > Calendari e incontri
+- Tocca Modifica sulla scheda della data; cambia Stato in 'Annullato' e salva.
+- La scheda resta visibile nella pagina pubblica con la dicitura ANNULLATO.
+
+AVVERTENZE
+- NON caricare password, VAPID privata o chiavi Supabase segrete su GitHub.
+- Il file public/config.js contiene soltanto URL e chiave PUBBLICA Supabase.
+- La migrazione crea due tabelle vuote e non modifica dati preesistenti.
+- Il progetto è una PWA con backend Supabase, non Next.js.
+- Le notifiche push generali già presenti restano; gli invii selettivi
+  per gruppo e l'area riservata ai genitori non sono ancora realizzati.
+- Sull'ambiente reale verificare le regole RLS e il funzionamento del login.
