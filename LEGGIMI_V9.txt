@@ -1,0 +1,32 @@
+SAN GIOVANNI NETTUNO v9 — Messe speciali, testi formattati, amministrazione semplificata
+
+1. In Supabase SQL Editor eseguire sql/05_riquadri_messe.sql (una sola volta, ripetibile).
+   Richiede che lo schema v8 sia già presente. Il nuovo SQL NON elimina orari, avvisi o canti.
+2. Aggiornare il repository GitHub con tutti i file del progetto v9.
+   Non caricare in GitHub il file con chiavi VAPID private o le chiavi segrete Supabase.
+3. Netlify avvia automaticamente il nuovo deploy; verificare lo stato Published.
+4. Dopo il deploy, se appare la vecchia interfaccia, aggiornare la pagina o chiudere/riaprire la PWA.
+
+LITURGIA
+Nel pannello amministratore: Liturgia → Riquadri speciali → Nuovo, titolo ad es. Natale;
+poi Liturgia → Giorni speciali → crea una riga per ogni data, selezionando lo stesso riquadro.
+Per pubblicare il riquadro sul sito, pubblica sia il riquadro sia le date confermate.
+Le date aggiunte prevalgono sugli orari standard solo nel giorno indicato.
+Un riquadro può essere nascosto senza eliminare le date.
+Se lo elimini, le date esistenti rimangono disponibili come giornate singole.
+
+CANTI
+Pannello amministratore → Canti → Testi dei canti: editor con Grassetto, Corsivo, Due colonne.
+Seleziona una porzione di testo prima di cliccare Grassetto o Corsivo.
+Inserisci due colonne con il pulsante e sostituisci i testi segnaposto.
+Su mobile le colonne vengono impilate per la leggibilità.
+I vecchi testi non formattati rimangono leggibili.
+Non pubblicare testi musicali soggetti a copyright senza autorizzazione.
+
+AMMINISTRAZIONE
+Quattro aree: Comunicazioni / Liturgia / Canti / Spiritualità.
+Ogni area contiene solo le proprie sottosezioni, mantenendo ruoli e permessi precedenti.
+
+Questa versione conserva Netlify Functions e servizio notifiche push della v8.
+Le nuove schermate sono state testate in ambiente dimostrativo. L'interazione con
+il tuo progetto Supabase dovrà essere verificata dopo il deploy.
