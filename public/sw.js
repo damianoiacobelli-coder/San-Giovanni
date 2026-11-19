@@ -1,6 +1,6 @@
 // San Giovanni v9 – service worker per PWA + notifiche push.
-const CACHE='san-giovanni-v12-banner-bg';
-const FILES=['./','./index.html','./cei-almanacco.html','./config.js','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png','./banner-bg-desktop.webp','./banner-bg-mobile.webp'];
+const CACHE='san-giovanni-v13-banner-definitivo';
+const FILES=['./','./index.html','./cei-almanacco.html','./config.js','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png','./banner-definitivo.webp','./banner-mobile-testo.webp','./banner-mobile-comunita.webp'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{
   for(const key of await caches.keys())if(key!==CACHE&&key.startsWith('san-giovanni'))await caches.delete(key);
