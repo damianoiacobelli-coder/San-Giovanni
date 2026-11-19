@@ -9,4 +9,4 @@ if (!html.includes('song_placements') || !html.includes('song_categories') || !h
 if(!html.includes('admin-groups') || !html.includes('mass_collections') || !html.includes('sg-rich-editor'))throw new Error('Funzioni v9 mancanti');
 if(!html.includes('function catechesi()') || !html.includes('catechism_groups') || !html.includes('parseCatechDates'))throw new Error('Calendari catechesi v10 mancanti');
 if(!html.includes('function liturgia()') || !html.includes('liturgyHomeCards()') || !html.includes('https://www.chiesacattolica.it/santo-del-giorno/'))throw new Error('Sezione liturgica CEI v11 mancante');
-console.log('San Giovanni v11: progetto pronto per la pubblicazione');
+console.log('San Giovanni v12: progetto pronto per la pubblicazione');
